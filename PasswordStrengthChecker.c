@@ -56,6 +56,38 @@ int main()
     }
     b1:
     fclose(f2);
+
+	//Check given password is most common password or not
+	char commonpass[20];
+	char cp;
+	FILE *f1;
+	int k;
+	f1=fopen("CommonPass.txt","r");
+	a2:
+	k=0;
+	while((cp = fgetc(f1)) != '\n' && cp != EOF)
+	{
+		commonpass[k]=cp;
+		k++;
+	}
+	commonpass[k]='\0';
+	// Check for end of file
+    if(feof(f1)) 
+	{
+        goto a1; 
+    }
+	if(strcmp(pass,commonpass)==0)
+	{  		
+		printf("\nYour password is too common.Use a mix of uppercase,lowercase letters,digits and special characters for better security.");
+		flag++;	    
+	    goto a1;
+	}
+	else
+	{
+		goto a2;
+	}
+	a1:
+	fclose(f1);
 }
 
 
