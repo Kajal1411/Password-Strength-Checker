@@ -22,7 +22,40 @@ int main()
 	printf("Enter Password:");
 	scanf("%s",pass);
 	
-	
+	//Check Password is already exists or not.
+	char oldpass[20];
+	char op;
+	FILE *f2;
+	int m;
+	f2=fopen("OldPass.txt","r");
+	b2:
+	m=0;
+	while((op = fgetc(f2)) != '\n' && op != EOF)
+	{
+    	oldpass[m]=op;
+    	m++;
+    }
+    oldpass[m]='\0';
+    if(strcmp(pass,oldpass)==0)
+    {  		
+    	printf("\nGiven password is already exists.Please select a different password for better security.");	    
+    	flag++;
+		goto b1;
+    }
+    else
+    {
+    	// Check for end of file
+    	if(feof(f2)) 
+        {
+            goto b1; 
+        }
+        else
+        {
+            goto b2;
+		}
+    }
+    b1:
+    fclose(f2);
 }
 
 
